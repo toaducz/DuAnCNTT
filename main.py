@@ -3,6 +3,7 @@ from io import TextIOWrapper, BytesIO
 from nltk.tokenize import word_tokenize
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
+@st.cache(hash_funcs={"MyUnhashableClass": lambda _: None}
 @st.cache
 def load_model():
 	return AutoModelForSeq2SeqLM.from_pretrained("toanduc/vit5-base-vietnews-summarization-finetuned")
