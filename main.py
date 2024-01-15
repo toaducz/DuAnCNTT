@@ -12,7 +12,7 @@ model1 = AutoModelForSeq2SeqLM.from_pretrained("toanduc/vit5-base-vietnews-summa
 def main():
     
     
-    st.title("Tóm Tắt Văn Bản Webapp")
+    st.title("Tóm Tắt Văn Bản L903-1")
     
     # Chọn phương thức nhập liệu từ người dùng
     input_method = st.radio("Chọn Phương Thức Nhập Liệu:", ("Tải Lên File", "Nhập Tay"))
