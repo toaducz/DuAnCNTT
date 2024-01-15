@@ -1,7 +1,7 @@
 # render.yaml
 
 services:
-  - name: your-streamlit-app
+  - name: test
     env: python=3.8
     startCommand: streamlit run main.py
     github:
