@@ -1,0 +1,8 @@
+# render.yaml
+
+services:
+  - name: your-streamlit-app
+    env: python=3.8
+    startCommand: streamlit run your_app.py
+    github:
+      branch: main
