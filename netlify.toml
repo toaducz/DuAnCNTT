@@ -1,3 +1,3 @@
 [build]
-  command = "pip install -r requirements.txt && python -m streamlit.cli run main.py"
+  command = "pip install -r requirements.txt && streamlit run main.py"
   publish = "."
