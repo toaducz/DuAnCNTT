@@ -5,11 +5,11 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 @st.cache
 def load_model():
-	  return AutoModelForSeq2SeqLM.from_pretrained("toanduc/vit5-base-vietnews-summarization-finetuned")
+	return AutoModelForSeq2SeqLM.from_pretrained("toanduc/vit5-base-vietnews-summarization-finetuned")
 
 @st.cache
-def c():
-	  return AutoTokenizer.from_pretrained("toanduc/vit5-base-vietnews-summarization-finetuned")
+def load_token():
+	return AutoTokenizer.from_pretrained("toanduc/vit5-base-vietnews-summarization-finetuned")
 
 
 tokenizer1 = load_token()
