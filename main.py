@@ -6,7 +6,7 @@ tokenizer1 = AutoTokenizer.from_pretrained("toanduc/vit5-base-vietnews-summariza
 model1 = AutoModelForSeq2SeqLM.from_pretrained("toanduc/vit5-base-vietnews-summarization-finetuned")
 
 # Use st.cache to cache the results of perform_summarization function
-@st.cache_data
+@st.cache
 def perform_summarization(sentence):
     inputs = tokenizer1.encode("summarize: " + sentence, return_tensors="pt", max_length=512, truncation=True)
     summary_ids1 = model1.generate(inputs, max_length=200, length_penalty=2.0, num_beams=4, early_stopping=True, no_repeat_ngram_size=3)
