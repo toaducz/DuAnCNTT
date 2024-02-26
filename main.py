@@ -1,18 +1,23 @@
 import streamlit as st
-from io import TextIOWrapper, BytesIO
-from nltk.tokenize import word_tokenize
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-
-
+# Load tokenizer and model outside of the main function
 tokenizer1 = AutoTokenizer.from_pretrained("toanduc/vit5-base-vietnews-summarization-finetuned")
-
 model1 = AutoModelForSeq2SeqLM.from_pretrained("toanduc/vit5-base-vietnews-summarization-finetuned")
 
+# Use st.cache to cache the results of perform_summarization function
+@st.cache_data
+def perform_summarization(sentence):
+    inputs = tokenizer1.encode("summarize: " + sentence, return_tensors="pt", max_length=512, truncation=True)
+    summary_ids1 = model1.generate(inputs, max_length=200, length_penalty=2.0, num_beams=4, early_stopping=True, no_repeat_ngram_size=3)
+    summary_text_t5 = tokenizer1.decode(summary_ids1[0], skip_special_tokens=True)
+    
+    summarized_text = summary_text_t5
+
+    return summarized_text
+
 def main():
-    
-    
-    st.title("Tóm Tắt Văn Bản L903-1")
+    st.title("Tóm Tắt Văn Bản Webapp")
     
     # Chọn phương thức nhập liệu từ người dùng
     input_method = st.radio("Chọn Phương Thức Nhập Liệu:", ("Tải Lên File", "Nhập Tay"))
@@ -42,16 +47,6 @@ def main():
         # Hiển thị kết quả tóm tắt
         st.subheader("Kết Quả Tóm Tắt:")
         st.write(summarized_text)
-
-def perform_summarization(sentence):
-    inputs = tokenizer1.encode("summarize: " + sentence, return_tensors="pt", max_length=512, truncation=True)
-
-    summary_ids1 = model1.generate(inputs, max_length=200, length_penalty=2.0, num_beams=4, early_stopping=True, no_repeat_ngram_size=3)
-    summary_text_t5 = tokenizer1.decode(summary_ids1[0], skip_special_tokens=True)
-    
-    summarized_text = summary_text_t5
-
-    return summarized_text
 
 if __name__ == "__main__":
     main()
